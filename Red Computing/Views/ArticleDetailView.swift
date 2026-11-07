@@ -1,26 +1,27 @@
 import SwiftUI
 
 struct ArticleDetailView: View {
-    let article: GuideArticle
-    private var related: [GuideArticle] {
-        GuideArticle.library.filter { $0.id != article.id }
+    private let viewModel: ArticleDetailViewModel
+
+    init(article: GuideArticle) {
+        viewModel = ArticleDetailViewModel(article: article)
     }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                PageIntro(eyebrow: article.category, title: article.title, subtitle: article.summary, icon: article.icon)
-                Text(article.body).lineSpacing(6).textSelection(.enabled)
-                if let url = URL(string: article.source) {
+                PageIntroView(eyebrow: viewModel.article.category, title: viewModel.article.title, subtitle: viewModel.article.summary, icon: viewModel.article.icon)
+                Text(viewModel.article.body).lineSpacing(6).textSelection(.enabled)
+                if let url = viewModel.sourceURL {
                     Link(destination: url) {
-                        Label(article.sourceTitle, systemImage: "arrow.up.right")
+                        Label(viewModel.article.sourceTitle, systemImage: "arrow.up.right")
                     }
                     .buttonStyle(.bordered)
                 }
                 Divider()
                 Text("Keep learning").font(.title2.bold())
-                ForEach(related) { item in
-                    ArticleLink(article: item)
+                ForEach(viewModel.relatedArticles) { item in
+                    ArticleLinkView(article: item)
                 }
             }
             .padding(24)

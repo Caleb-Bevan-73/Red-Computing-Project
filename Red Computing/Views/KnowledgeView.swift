@@ -1,30 +1,27 @@
 import SwiftUI
 
 struct KnowledgeView: View {
-    @State private var query = ""
-    private var articles: [GuideArticle] {
-        GuideArticle.library.filter {
-            query.isEmpty || "\($0.title) \($0.summary) \($0.body)".localizedCaseInsensitiveContains(query)
-        }
-    }
+    @State private var viewModel = KnowledgeViewModel()
 
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                PageIntro(eyebrow: "THE KNOWLEDGE LIBRARY", title: "Know what goes\ninto your build.",
+                PageIntroView(eyebrow: "THE KNOWLEDGE LIBRARY", title: "Know what goes\ninto your build.",
                           subtitle: "A little context makes every component choice clearer.", icon: "books.vertical")
-                if articles.isEmpty {
-                    ContentUnavailableView.search(text: query)
+                if viewModel.articles.isEmpty {
+                    ContentUnavailableView.search(text: viewModel.query)
                 }
-                ForEach(articles) { article in
-                    ArticleLink(article: article)
+                ForEach(viewModel.articles) { article in
+                    ArticleLinkView(article: article)
                 }
             }
             .padding(24)
             .frame(maxWidth: 850)
             .frame(maxWidth: .infinity)
         }
-        .searchable(text: $query, prompt: "Search building, graphics, memory…")
+        .searchable(text: $viewModel.query, prompt: "Search building, graphics, memory…")
         .navigationTitle("Learn")
     }
 }

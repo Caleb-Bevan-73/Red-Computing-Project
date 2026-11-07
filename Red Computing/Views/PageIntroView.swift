@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PageIntro: View {
+struct PageIntroView: View {
     let eyebrow: String
     let title: String
     let subtitle: String
@@ -11,7 +11,7 @@ struct PageIntro: View {
             Label(eyebrow, systemImage: icon)
                 .font(.caption.weight(.bold))
                 .tracking(2)
-                .foregroundStyle(Workshop.accent)
+                .foregroundStyle(WorkshopTheme.accent)
             Text(title)
                 .font(.largeTitle.bold())
             Text(subtitle)

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ArticleLink: View {
+struct ArticleLinkView: View {
     let article: GuideArticle
 
     var body: some View {
@@ -9,7 +9,7 @@ struct ArticleLink: View {
         } label: {
             HStack(alignment: .top, spacing: 16) {
                 Image(systemName: article.icon)
-                    .font(.title2).foregroundStyle(Workshop.accent)
+                    .font(.title2).foregroundStyle(WorkshopTheme.accent)
                     .frame(width: 32)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 6) {

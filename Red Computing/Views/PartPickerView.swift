@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct PartPicker: View {
+struct PartPickerView: View {
     let kind: PartKind
+    let options: [Part]
     @Binding var selection: String
-    private var options: [Part] { Part.catalog.filter { $0.kind == kind } }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {

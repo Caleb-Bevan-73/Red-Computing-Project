@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct WorkshopCard: ViewModifier {
+struct WorkshopCardModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(20)
@@ -14,6 +14,6 @@ struct WorkshopCard: ViewModifier {
 
 extension View {
     func workshopCard() -> some View {
-        modifier(WorkshopCard())
+        modifier(WorkshopCardModifier())
     }
 }

@@ -4,9 +4,9 @@ struct ContentView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                BuildGuideView()
+                MyBuildsView()
             }
-            .tabItem { Label("My build", systemImage: "pc") }
+            .tabItem { Label("My Builds", systemImage: "pc") }
 
             NavigationStack {
                 ComparisonView()
@@ -18,7 +18,7 @@ struct ContentView: View {
             }
             .tabItem { Label("Learn", systemImage: "books.vertical") }
         }
-        .tint(Workshop.accent)
+        .tint(WorkshopTheme.accent)
     }
 }
 
