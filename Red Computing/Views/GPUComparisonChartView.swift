@@ -70,7 +70,7 @@ struct GPUComparisonChartView: View {
             Text("Choose a GPU to show its label. Scroll horizontally to see every architecture.")
                 .font(.caption).foregroundStyle(.secondary)
 
-            GPUBenchmarkSource()
+            GPUBenchmarkSourceView()
             Divider()
             Text("\(viewModel.resolution.rawValue) rankings").font(.headline)
             Text("All \(viewModel.benchmarks.count) GPUs · FPS").font(.caption).foregroundStyle(.secondary)
@@ -100,7 +100,7 @@ struct GPUComparisonChartView: View {
     }
 }
 
-private struct GPUBenchmarkSource: View {
+private struct GPUBenchmarkSourceView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Tom’s Hardware · June 24, 2026 snapshot")

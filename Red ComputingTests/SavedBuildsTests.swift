@@ -5,7 +5,7 @@ import Testing
 @MainActor
 struct SavedBuildsTests {
     private func makeModel(_ store: MemoryBuildStore) -> MyBuildsViewModel {
-        MyBuildsViewModel(store: store, catalog: Part.catalog)
+        MyBuildsViewModel(store: store, catalog: ComponentCatalog.parts)
     }
 
     private func nameAndSave(_ model: MyBuildsViewModel, _ name: String) {
@@ -154,18 +154,18 @@ struct SavedBuildsTests {
         defer { defaults.removePersistentDomain(forName: suite) }
         defaults.set("7600", forKey: "selectedCPU")
         let store = BuildStore(defaults: defaults)
-        let model = MyBuildsViewModel(store: store, catalog: Part.catalog)
+        let model = MyBuildsViewModel(store: store, catalog: ComponentCatalog.parts)
         #expect(model.cpuID == "7600" && model.savedBuilds.isEmpty)
         nameAndSave(model, "Migrated")
         model.gpuID = "7800xt"
-        let restored = MyBuildsViewModel(store: BuildStore(defaults: defaults), catalog: Part.catalog)
+        let restored = MyBuildsViewModel(store: BuildStore(defaults: defaults), catalog: ComponentCatalog.parts)
         #expect(restored.savedBuilds == model.savedBuilds)
         #expect(restored.activeBuildID == model.activeBuildID)
         #expect(restored.configuration == model.configuration && restored.hasUnsavedChanges)
         #expect(restored.savedBuilds[0].configuration.gpuID.isEmpty)
         let invalid = Data("not valid JSON".utf8)
         defaults.set(invalid, forKey: "buildWorkspace.v1")
-        let broken = MyBuildsViewModel(store: store, catalog: Part.catalog)
+        let broken = MyBuildsViewModel(store: store, catalog: ComponentCatalog.parts)
         #expect(!broken.storageAvailable)
         broken.cpuID = "14600k"
         broken.save()

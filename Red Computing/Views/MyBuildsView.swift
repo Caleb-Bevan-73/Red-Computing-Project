@@ -14,20 +14,23 @@ struct MyBuildsView: View {
 
                 VStack(alignment: .leading, spacing: 18) {
                     Label("Your core components", systemImage: "cpu").font(.title3.bold())
-                    Text("A starter catalog to shape your personal reading list.")
+                    Text("Choose one component in each category. Incomplete builds can be saved.")
                         .font(.subheadline).foregroundStyle(.secondary)
-                    PartPickerView(kind: .cpu, options: viewModel.cpuOptions, selection: $viewModel.cpuID)
-                    Divider()
-                    PartPickerView(kind: .gpu, options: viewModel.gpuOptions, selection: $viewModel.gpuID)
-                    Text("\(viewModel.selectedParts.count) of 2 core parts selected")
+                    ForEach(viewModel.componentKinds) { kind in
+                        PartPickerView(kind: kind, viewModel: viewModel)
+                        Divider()
+                    }
+                    Text("\(viewModel.selectedParts.count) of \(viewModel.componentKinds.count) components selected")
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 .workshopCard()
 
+                BuildCompatibilityView(checks: viewModel.compatibilityChecks)
+
                 VStack(alignment: .leading, spacing: 14) {
                     Text("Made for your build").font(.title2.bold())
                     if viewModel.selectedParts.isEmpty {
-                        Label("Select a CPU or GPU to unlock matching manufacturer resources.", systemImage: "link")
+                        Label("Select components to unlock matching manufacturer resources.", systemImage: "link")
                             .foregroundStyle(.secondary)
                             .workshopCard()
                     }

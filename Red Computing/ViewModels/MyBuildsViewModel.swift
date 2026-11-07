@@ -27,7 +27,7 @@ final class MyBuildsViewModel {
     }
 
     convenience init(defaults: UserDefaults = .standard) {
-        self.init(store: BuildStore(defaults: defaults), catalog: Part.catalog)
+        self.init(store: BuildStore(defaults: defaults), catalog: ComponentCatalog.parts)
     }
 
     convenience init(defaults: UserDefaults = .standard, catalog: [Part]) {
@@ -62,23 +62,51 @@ final class MyBuildsViewModel {
     var cpuID: String {
         get { configuration.cpuID }
         set {
-            workspace.configuration.cpuID = newValue
-            persistDraft()
+            select(newValue, for: .cpu)
         }
     }
 
     var gpuID: String {
         get { configuration.gpuID }
         set {
-            workspace.configuration.gpuID = newValue
-            persistDraft()
+            select(newValue, for: .gpu)
         }
     }
 
-    var cpuOptions: [Part] { catalog.filter { $0.kind == .cpu } }
-    var gpuOptions: [Part] { catalog.filter { $0.kind == .gpu } }
+    var componentKinds: [PartKind] { PartKind.allCases }
+
     var selectedParts: [Part] {
-        [cpuOptions.first { $0.id == cpuID }, gpuOptions.first { $0.id == gpuID }].compactMap { $0 }
+        componentKinds.compactMap { selectedPart(for: $0) }
+    }
+
+    func selectedPart(for kind: PartKind) -> Part? {
+        catalog.first { $0.kind == kind && $0.id == configuration[kind] }
+    }
+
+    var compatibilityChecks: [CompatibilityCheck] {
+        BuildCompatibility.evaluate(configuration, catalog: catalog)
+    }
+
+    func options(for kind: PartKind) -> [PartOption] {
+        catalog.filter { $0.kind == kind }.map { part in
+            PartOption(part: part, checks: BuildCompatibility.checks(for: part, in: configuration, catalog: catalog))
+        }
+    }
+
+    func select(_ id: String, for kind: PartKind) {
+        // Removal always works, including recovery from a conflicting saved configuration.
+        if !id.isEmpty {
+            guard let option = options(for: kind).first(where: { $0.id == id }) else {
+                errorMessage = "This component is unavailable. Your current selection has been kept."
+                return
+            }
+            guard option.canSelect else {
+                errorMessage = option.checks.first { $0.status == .incompatible }?.message
+                return
+            }
+        }
+        workspace.configuration[kind] = id
+        persistDraft()
     }
 
     func save() {
@@ -233,9 +261,12 @@ final class MyBuildsViewModel {
     }
 
     private func validDraft(_ configuration: BuildConfiguration) -> BuildConfiguration {
-        BuildConfiguration(
-            cpuID: catalog.contains { $0.id == configuration.cpuID && $0.kind == .cpu } ? configuration.cpuID : "",
-            gpuID: catalog.contains { $0.id == configuration.gpuID && $0.kind == .gpu } ? configuration.gpuID : ""
-        )
+        var draft = configuration
+        for kind in PartKind.allCases {
+            if !catalog.contains(where: { $0.id == draft[kind] && $0.kind == kind }) {
+                draft[kind] = ""
+            }
+        }
+        return draft
     }
 }

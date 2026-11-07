@@ -28,7 +28,7 @@ struct GuideArticle: Identifiable, Hashable {
                      sourceTitle: "Explore AMD FSR"),
         GuideArticle(id: "checklist", title: "Before you order", category: "BUILD ESSENTIALS",
                      icon: "checklist", summary: "The physical checks a parts list cannot skip.",
-                     body: "Check GPU length and thickness against your case, including space used by front radiators. Confirm CPU cooler height, socket mounting support, and RAM clearance.\n\nFollow the graphics-card manufacturer’s power-supply and connector requirements for your exact model. Check the motherboard form factor, storage slots, and front-panel connections.\n\nThis starter app tailors reading to your CPU and GPU selections; it does not validate a complete build. Use the exact component manuals to finish these checks.",
+                     body: "Check GPU length and thickness against your case, including space used by front radiators. Confirm CPU cooler height, socket mounting support, and RAM clearance.\n\nFollow the graphics-card manufacturer’s power-supply and connector requirements for your exact model. Check the motherboard form factor, storage slots, and front-panel connections.\n\nThe app checks documented component relationships, BIOS conditions, memory limits, storage slots, and estimated power needs. Case fit, cooling, exact memory-kit qualification, and partner GPU variations still need manual verification. Use the exact component manuals before ordering.",
                      source: "https://www.amd.com/en/gaming/desktops/ryzen-radeon-platforms.html",
                      sourceTitle: "Explore the Ryzen and Radeon platform")
     ]

@@ -1,0 +1,120 @@
+COMPONENT CATALOG RESEARCH — 2026-11-07
+
+Scope and pricing
+The existing catalog contains Ryzen 5 7600, Core i5-14600K, Radeon RX 7800 XT,
+and GeForce RTX 4070 SUPER. GPU entries identify chips/reference designs, not
+specific partner cards. Compatibility feedback explicitly preserves that limit.
+There is no existing price model, total, sharing, or export feature. No prices
+were added. This is a curated product catalog, not a live availability feed.
+
+Exactly eight additions
+RAM: Kingston FURY Beast KF548C38BBK2-32 (2 x 16 GB) and KF548C38BBK2-64
+(2 x 32 GB). Both DDR5-4800, 288-pin unbuffered, 1.1 V, default PnP CL38,
+with XMP 3.0. 32 GB kit is single rank per module; 64 GB is dual rank.
+https://www.kingston.com/datasheets/KF548C38BBK2-32.pdf
+https://www.kingston.com/datasheets/KF548C38BBK2-64.pdf
+Exact board/kit QVL qualification is NOT verified. The app shows that as unknown,
+separate from supported generation, two-DIMM configuration and capacity.
+Neither kit is represented as EXPO-certified. Profile timings are not promised.
+These are established SKUs; present retail stock is not verified.
+
+Storage: Samsung 990 PRO 1 TB MZ-V9P1T0BW and 2 TB MZ-V9P2T0BW, without
+attached heatsinks. PCIe 4.0 x4 NVMe, M.2 2280. Capacity is the meaningful choice.
+https://download.semiconductor.samsung.com/resources/data-sheet/Samsung_NVMe_SSD_990_PRO_Datasheet_Rev.1.0_10129514049640.pdf
+
+PSUs: Corsair RM750e (2025), CP-9020295, and RM850e (2025), CP-9020296.
+750/850 W; +12 V 62.5/70.8 A; ATX 3.1; 140 x 150 x 86 mm.
+Both offer 24-pin ATX, two EPS 4+4 cables and alternative GPU cable paths:
+native 600 W 12V-2x6, OR included PSU-side 12V-2x6 to two GPU-side 6+2 pins.
+These alternatives use the same PSU port; they are not counted simultaneously.
+This GPU path leaves CPU/EPS ports available for both board power connectors.
+Other supplied 6+2 cables are not needed or counted by the selected path.
+https://www.corsair.com/uk/en/explorer/diy-builder/power-supply-units/corsair-rme-series-2025/
+https://www.corsair.com/us/en/p/psu/cp-9020295-na/rme-series-rm750e-fully-modular-low-noise-atx-power-supply-cp-9020295-na
+https://www.corsair.com/us/en/p/psu/cp-9020296-na/rm850e-fully-modular-low-noise-atx-power-supply-cp-9020296-na
+https://www.corsair.com/uk/en/explorer/diy-builder/power-supply-units/evolving-standards-12vhpwr-and-12v-2x6/
+Corsair documents backwards compatibility between 12V-2x6 and 12VHPWR.
+
+Motherboards and exact CPU support
+ASUS TUF GAMING B650-PLUS WIFI: AM5/B650, ATX, Ryzen 5 7600 listed for all
+PCB revisions and BIOS versions. Four DDR5 DIMM slots; current spec lists 256 GB,
+but the Ryzen CPU limit is 128 GB. Two single/dual-rank DIMMs up to DDR5-5200
+are documented by AMD. Board advertises EXPO. Primary GPU slot is PCIe 4.0 x16.
+Use M.2_2, PCIe 4.0 x4, supporting 2280. M.2_3 disables secondary PCIEX16_2;
+the recommended path avoids that sharing. Power headers: ATX 24-pin, EPS 8+4.
+https://www.asus.com/us/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650-plus-wifi/techspec/
+https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650-plus-wifi/helpdesk_cpu?model2Name=TUF-GAMING-B650-PLUS-WIFI
+
+ASUS TUF GAMING Z790-PLUS WIFI (DDR5, NOT D4): LGA1700/Z790, ATX. ASUS CPU
+list specifies i5-14600K B0, BIOS 1205 minimum. Installed BIOS is unknown, hence
+conditional status. Recommend current vendor update instructions, not flashing
+an old minimum release. Four DDR5 slots, XMP; CPU supports up to 192 GB and
+DDR5-5600. ASUS page contains both 128 GB and 192 GB board limits: implementation
+uses conservative 128 GB. Both selected kits are below either limit. Primary
+GPU slot PCIe 5.0 x16. Use chipset M.2_2, documented PCIe 4.0 x4/2280; avoids
+ambiguity in the page's CPU-attached slot wording. ATX 24-pin and two EPS 8-pin.
+https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-z790-plus-wifi/techspec/
+https://www.asus.com/in/supportonly/tuf%20gaming%20z790-plus%20wifi/helpdesk_qvl_cpu/
+https://dlcdnets.asus.com/pub/ASUS/mb/LGA1700/TUF_GAMING_Z790-PLUS_WIFI/E21279_TUF_GAMING_Z790-PLUS_WIFI_UM_WEB.pdf
+
+CPU/GPU sources and power policy
+https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html
+https://www.intel.com/content/www/us/en/products/sku/236799/intel-core-i5-processor-14600k-24m-cache-up-to-5-30-ghz/specifications.html
+https://www.amd.com/en/support/downloads/drivers.html/graphics/radeon-rx/radeon-rx-7000-series/amd-radeon-rx-7800-xt.html
+https://www.amd.com/content/dam/amd/en/documents/radeon-tech-docs/user-guides/quick-start-guide-amd-radeon-7800xt.pdf
+https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-family/
+https://www.nvidia.com/content/geforce-gtx/GEFORCE_RTX_4070_SUPER_User_Guide_Rev1.pdf
+https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rx7800xt-o16g/techspec/
+ASUS corroborates the Radeon PCIe 4.0 interface; partner power/size figures are
+not substituted for AMD reference specifications.
+
+Ryzen: documented 65 W TDP; app uses a clearly labeled 100 W CPU planning
+allowance, NOT a claimed manufacturer maximum. Stock settings, PBO off.
+Intel: documented maximum turbo power 181 W, assuming Intel power limits.
+RX 7800 XT reference: 263 W board power, minimum 700 W PSU and >54 A +12 V,
+two PCIe 8-pin GPU inputs. RTX 4070 SUPER reference: 220 W graphics power,
+minimum 650 W PSU, two 8-pin cables through supplied adapter OR >=300 W native
+PCIe Gen 5 cable. Selected PSUs use the latter path for this GPU.
+
+App planning target = max(GPU vendor PSU guidance,
+ceil((CPU budget + GPU board power + 100 W other parts) * 1.25)).
+100 W covers the motherboard, one RAM kit, one drive, fans and modest USB load;
+25% is an explicit planning reserve, not a transient-load measurement.
+Result: 700 W for either CPU with Radeon; 650 W for either CPU with GeForce.
+Both 750 W and 850 W paths meet those assumptions and documented +12 V guidance.
+PSU suitability remains conditional: overclocking, changed power limits, partner
+GPU variants and additional hardware need a new assessment.
+
+Architecture and persistence
+BuildConfiguration is the authoritative value for all six selections.
+MyBuildsViewModel owns actions/state; PartOption presents candidate feedback.
+BuildCompatibility is a reusable stateless evaluator. Models hold specifications;
+views render options, detail links and status text. Known incompatible candidate
+selections are rejected in the view model as well as disabled in the UI.
+Existing selections are never removed because of compatibility results.
+BuildStore continues to encode the same UserDefaults workspace and UUID snapshots.
+Custom decoding defaults absent new selection fields to empty strings, preserving
+version-one saves. Save, Save as New, switching and cancellation use the same flow.
+Comparison remains CPU/GPU-only; no invented benchmarks for new categories.
+
+Limits
+No complete-PC guarantee: exact RAM kit QVL/profile stability, installed BIOS,
+case/PSU mounting, physical GPU/cable clearance, CPU cooling and front-panel
+connections remain unverified. The one-drive path assumes the recommended slot
+is free. Empty/missing specifications return unknown, never a passing result.
+
+Verification
+Xcode app build passed without warnings. Fourteen Swift Testing tests passed:
+six existing saved-build tests plus eight component tests. Coverage includes all
+32 supported CPU/GPU/RAM/storage/PSU combinations with the appropriate board,
+wrong-platform rejection, BIOS conditions, memory generation/slot/capacity limits,
+storage interface/size conflicts, PSU wattage/current/connectors, missing data,
+replace/remove, retained persisted conflicts, full save/copy/reload, cancel, and
+actual older workspace JSON through BuildStore.
+
+iPhone 18 Pro Max simulator: six category controls and browse links were visible;
+RAM select/replace/remove updated the selected count. Wrong-platform Z790 was
+visibly disabled, marked Disabled in the accessibility hierarchy, and could not
+be selected with Ryzen 7600. B650 selection worked and its long label fit.
+An initial Picker option did not render disabled reliably; replaced with disabled
+Menu buttons and reverified. No saved snapshots were changed by UI checks.

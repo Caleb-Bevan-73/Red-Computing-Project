@@ -12,7 +12,7 @@ struct ComparisonView: View {
                 PageIntroView(eyebrow: "THE PERFORMANCE LAB", title: "An equal playing field.",
                           subtitle: "Native rendering first. Technology features explained separately.", icon: "chart.bar.xaxis")
                 Picker("Component type", selection: $viewModel.kind) {
-                    ForEach(PartKind.allCases) { kind in
+                    ForEach(viewModel.comparisonKinds) { kind in
                         Text(kind.rawValue).tag(kind)
                     }
                 }

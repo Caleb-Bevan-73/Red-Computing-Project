@@ -4,6 +4,7 @@ import Observation
 @MainActor
 @Observable
 final class ComparisonViewModel {
+    let comparisonKinds: [PartKind] = [.cpu, .gpu]
     var kind: PartKind = .gpu
     private let catalog: [Part]
 
@@ -17,7 +18,7 @@ final class ComparisonViewModel {
     ]
 
     convenience init() {
-        self.init(catalog: Part.catalog)
+        self.init(catalog: ComponentCatalog.parts)
     }
 
     init(catalog: [Part]) {

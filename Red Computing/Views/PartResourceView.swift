@@ -1,23 +1,30 @@
 import SwiftUI
 
 struct PartResourceView: View {
-    let part: Part
+    private let viewModel: PartResourceViewModel
+
+    init(part: Part) {
+        viewModel = PartResourceViewModel(part: part)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(part.detail).font(.caption).foregroundStyle(.secondary)
-            Text(part.name).font(.headline)
-            Text(part.technology).font(.subheadline).foregroundStyle(.secondary)
-            if let url = URL(string: part.resource) {
+            Text(viewModel.part.detail).font(.caption).foregroundStyle(.secondary)
+            Text(viewModel.part.name).font(.headline)
+            Text(viewModel.part.technology).font(.subheadline).foregroundStyle(.secondary)
+            if let url = viewModel.manufacturerURL {
                 Link(destination: url) {
                     Label("Manufacturer resource", systemImage: "arrow.up.right")
                 }
             }
+            if let url = viewModel.cpuSupportURL {
+                Link("Exact CPU support and BIOS list", destination: url)
+                    .font(.subheadline)
+            }
             NavigationLink {
-                ArticleDetailView(article: part.kind == .cpu ? .compatibility : .features)
+                ArticleDetailView(article: viewModel.guideArticle)
             } label: {
-                Label(part.kind == .cpu ? "Understand platform compatibility" : "Understand graphics technologies",
-                      systemImage: "book")
+                Label(viewModel.guideTitle, systemImage: "book")
             }
             .font(.subheadline)
         }
